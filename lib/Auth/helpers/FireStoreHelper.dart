@@ -1,8 +1,8 @@
-
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:fatima/Auth/Models/RegisterRequest.dart';
 import 'package:fatima/Auth/Models/UserModel.dart';
-import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class FirestoreHelper {
   FirestoreHelper._();
@@ -23,8 +23,7 @@ class FirestoreHelper {
   getUserFromFirestore(String userId) async {
     DocumentSnapshot documentSnapshot =
     await firebaseFirestore.collection('Users').doc(userId).get();
-
-    print(documentSnapshot.data());
+    print(documentSnapshot.data().toString());
   }
 
   Future<List<UserModel>> getAllUsersFromFirestore() async {

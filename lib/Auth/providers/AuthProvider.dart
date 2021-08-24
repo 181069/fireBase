@@ -33,8 +33,28 @@ class AuthProvider extends ChangeNotifier{
   TextEditingController cituController = TextEditingController();
 
   String password;
-  register()async{
-   AuthHelper.authHelper.signup(emailcontroller.text.toString().trim(), passwordcontroller.text);
+  register() async {
+   try {
+    UserCredential userCredential = await AuthHelper.authHelper
+        .signup(emailController.text, passwordController.text);
+    RegisterRequest registerRequest = RegisterRequest(
+        id: userCredential.user.uid,
+        city: cituController.text,
+        country: countryController.text,
+        email: emailController.text,
+        fName: firstNameController.text,
+        lName: lastNameController.text,
+        password: passwordController.text);
+    await FirestoreHelper.firestoreHelper.addUserToFirestore(registerRequest);
+    await AuthHelper.authHelper.verifyEmail();
+    await AuthHelper.authHelper.logout();
+    tabController.animateTo(1);
+   } on Exception catch (e) {
+    // TODO
+   }
+// navigate to login
+
+   resetControllers();
   }
 
   login()async{
