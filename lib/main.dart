@@ -44,25 +44,29 @@ class _FirebasConfigState extends State<FirebasConfig> {
   }
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<FirebaseApp>(
-      future: Firebase.initializeApp(),
-      builder: (context, AsyncSnapshot<FirebaseApp> dataSnapshot) {
-        if (dataSnapshot.hasError) {
+    return Consumer<AuthProvider>(builder:(context,provider,x){
+      return FutureBuilder<FirebaseApp>(
+        future: Firebase.initializeApp(),
+        builder: (context, AsyncSnapshot<FirebaseApp> dataSnapshot) {
+          if (dataSnapshot.hasError) {
+            return Scaffold(
+              body: Container(
+                child: Text("${dataSnapshot.error.toString()}"),
+              ),
+            );
+          }
+          if (dataSnapshot.connectionState == ConnectionState.done) {
+            print(provider.checkLogin().toString());
+            return AuthMainPage( d:provider.checkLogin(),);
+          }
           return Scaffold(
-            body: Container(
-              child: Text("${dataSnapshot.error.toString()}"),
+            body: Center(
+              child: CircularProgressIndicator(),
             ),
           );
-        }
-        if (dataSnapshot.connectionState == ConnectionState.done) {
-          return AuthMainPage();
-        }
-        return Scaffold(
-          body: Center(
-            child: CircularProgressIndicator(),
-          ),
-        );
-      },
-    );
+        },
+      );
+
+    });
   }
 }
