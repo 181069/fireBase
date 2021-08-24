@@ -15,5 +15,9 @@ class AuthProvider extends ChangeNotifier{
   login()async{
     AuthHelper.authHelper.signin(emailcontroller.text.toString().trim(), passwordcontroller.text);
   }
+   Future<bool> checkLogin()async{
+    bool isSignIn= await AuthHelper.authHelper.test();
+    return isSignIn;
+  }
 
 }

@@ -20,6 +20,7 @@ class AuthHelper {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
         print('The account already exists for that email.');
+        return false;
       }
       else if (e.code == 'weak-password') {
         print('The password provided is too weak.');
