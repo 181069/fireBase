@@ -6,9 +6,31 @@ import 'package:provider/provider.dart';
 class AuthProvider extends ChangeNotifier{
   String email;
  bool IsSingIn=false;
+  List<CountryModel> countries;
+  List<dynamic> cities=[];
+  CountryModel selectedCountry;
+  String selectedCity;
+  SelectedCountry(CountryModel countrymodel){
+   this.selectedCountry=countrymodel;
+   this.cities= CountryModel.cities;
+   selectedCity(cities.first.toString());
+   notifyListeners();
+  }
+  SelectedCity(dynamic city){
+  this.selectedCity=city;
+   notifyListeners();
+  }
+  getCountriesFromFireStore()async{
+
+
+  }
+
   TextEditingController  emailcontroller = TextEditingController();
   TextEditingController  passwordcontroller = TextEditingController();
-
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController countryController = TextEditingController();
+  TextEditingController cituController = TextEditingController();
 
   String password;
   register()async{
