@@ -65,4 +65,16 @@ class AuthProvider extends ChangeNotifier{
 
   }
 
+
+
+  sendVericiafion() {
+   AuthHelper.authHelper.verifyEmail();
+   AuthHelper.authHelper.logout();
+  }
+
+  resetPassword() async {
+   AuthHelper.authHelper.resetPassword(emailController.text);
+   resetControllers();
+  }
+
 }

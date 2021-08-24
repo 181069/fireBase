@@ -31,15 +31,41 @@ class AuthHelper {
       print(e);
     }
   }
-  signin(String Email, String Password) async {
-    try {
-      UserCredential userCredential = await  firebaseAuth.signInWithEmailAndPassword(email: Email, password: Password);
-      print("fatima user check" +userCredential.user.uid);
 
-    } on Exception catch (e) {
-      print("fatima error" + e.toString());
+  Future<UserCredential> signin(String email, String password) async {
+    try {
+      UserCredential userCredential = await firebaseAuth
+          .signInWithEmailAndPassword(email: email, password: password);
+      return userCredential;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        CustomDialoug.customDialoug
+            .showCustomDialoug('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        CustomDialoug.customDialoug
+            .showCustomDialoug('Wrong password provided for that user.');
+      }
     }
   }
 
+  resetPassword(String email) async {
+    await firebaseAuth.sendPasswordResetEmail(email: email);
+    CustomDialoug.customDialoug.showCustomDialoug(
+        'we have sent email for reset password, please check your email');
+  }
+
+  verifyEmail() async {
+    await firebaseAuth.currentUser.sendEmailVerification();
+    CustomDialoug.customDialoug.showCustomDialoug(
+        'verification email has been sent, please check your email');
+  }
+
+  logout() async {
+    firebaseAuth.signOut();
+  }
+
+  bool checkEmailVerification() {
+    return firebaseAuth.currentUser?.emailVerified ?? false;
+  }
 
 }
