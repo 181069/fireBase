@@ -37,6 +37,12 @@ class FirebasConfig extends StatefulWidget {
 
 class _FirebasConfigState extends State<FirebasConfig> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+  }
+  @override
   Widget build(BuildContext context) {
     return FutureBuilder<FirebaseApp>(
       future: Firebase.initializeApp(),
