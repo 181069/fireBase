@@ -22,10 +22,8 @@ class _AuthMainPageState extends State<AuthMainPage> with SingleTickerProviderSt
 
     bool x;
     Provider.of<AuthProvider>(context, listen: false).checkLogin();
-    x=Provider.of<AuthProvider>(context, listen: false).IsSingIn;
-    tabController= TabController(length: 3, vsync: this,initialIndex:x ?2:3 );
-
-
+    x = Provider.of<AuthProvider>(context, listen: false).IsSingIn;
+    tabController= TabController(length: 3, vsync: this,initialIndex:x ?2:1 );
   }
   @override
   Widget build(BuildContext context) {

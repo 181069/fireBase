@@ -8,8 +8,8 @@ class AuthHelper {
   Future<bool> test() async{
     if (firebaseAuth.currentUser == null) {
     return false;
-
-    } else {
+    }
+    else {
      return true;
     }
   }

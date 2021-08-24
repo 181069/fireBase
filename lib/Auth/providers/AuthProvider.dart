@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 class AuthProvider extends ChangeNotifier{
   String email;
- bool IsSingIn;
+ bool IsSingIn=false;
   TextEditingController  emailcontroller = TextEditingController();
   TextEditingController  passwordcontroller = TextEditingController();
 
