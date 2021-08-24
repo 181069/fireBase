@@ -1,23 +1,31 @@
+import 'package:fatima/Auth/providers/AuthProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../WelcomePage.dart';
 import 'Login/LoginScreen.dart';
 import 'Signup/signup_screen.dart';
 class AuthMainPage extends StatefulWidget {
-   final Future<bool>  d;
-  const AuthMainPage({Key key,this.d}) : super(key: key);
+
+  AuthMainPage({Key key}) : super(key: key);
 
   @override
   _AuthMainPageState createState() => _AuthMainPageState();
 }
 
 class _AuthMainPageState extends State<AuthMainPage> with SingleTickerProviderStateMixin{
+  bool d;
   TabController tabController;
   @override
   void initState() {
     super.initState();
 
-    tabController= TabController(length: 3, vsync: this);
+    bool x;
+    Provider.of<AuthProvider>(context, listen: false).checkLogin();
+    x=Provider.of<AuthProvider>(context, listen: false).IsSingIn;
+    tabController= TabController(length: 3, vsync: this,initialIndex:x ?2:3 );
+
+
   }
   @override
   Widget build(BuildContext context) {

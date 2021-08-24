@@ -41,6 +41,7 @@ class _FirebasConfigState extends State<FirebasConfig> {
     // TODO: implement initState
     super.initState();
 
+
   }
   @override
   Widget build(BuildContext context) {
@@ -56,8 +57,8 @@ class _FirebasConfigState extends State<FirebasConfig> {
             );
           }
           if (dataSnapshot.connectionState == ConnectionState.done) {
-            print(provider.checkLogin().toString());
-            return AuthMainPage( d:provider.checkLogin(),);
+
+            return AuthMainPage();
           }
           return Scaffold(
             body: Center(

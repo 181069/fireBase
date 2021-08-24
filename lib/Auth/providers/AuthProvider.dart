@@ -1,8 +1,11 @@
+
+
 import 'package:fatima/Auth/helpers/auth_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 class AuthProvider extends ChangeNotifier{
   String email;
+ bool IsSingIn;
   TextEditingController  emailcontroller = TextEditingController();
   TextEditingController  passwordcontroller = TextEditingController();
 
@@ -15,9 +18,9 @@ class AuthProvider extends ChangeNotifier{
   login()async{
     AuthHelper.authHelper.signin(emailcontroller.text.toString().trim(), passwordcontroller.text);
   }
-   Future<bool> checkLogin()async{
-    bool isSignIn= await AuthHelper.authHelper.test();
-    return isSignIn;
+   checkLogin()async{
+     IsSingIn = await AuthHelper.authHelper.test();
+
   }
 
 }

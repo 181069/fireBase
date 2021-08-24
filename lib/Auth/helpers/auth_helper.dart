@@ -5,9 +5,10 @@ class AuthHelper {
 
   static AuthHelper authHelper = AuthHelper._();
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-  Future<bool> test()async{
-    if (firebaseAuth.currentUser==null) {
+  Future<bool> test() async{
+    if (firebaseAuth.currentUser == null) {
     return false;
+
     } else {
      return true;
     }

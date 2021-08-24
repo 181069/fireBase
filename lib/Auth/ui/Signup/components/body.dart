@@ -41,6 +41,7 @@ class Body extends StatelessWidget {
               RoundedButton(
                 text: "SIGNUP",
                 press: () {
+
                   provider.register();
                 },
               ),
