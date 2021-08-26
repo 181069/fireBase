@@ -7,7 +7,9 @@ import 'Auth/ui/AuthMainPage.dart';
 import 'Auth/ui/Login/LoginScreen.dart';
 import 'Auth/ui/Signup/signup_screen.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -47,6 +49,7 @@ class _FirebasConfigState extends State<FirebasConfig> {
   Widget build(BuildContext context) {
     return Consumer<AuthProvider>(builder:(context,provider,x){
       return FutureBuilder<FirebaseApp>(
+
         future: Firebase.initializeApp(),
         builder: (context, AsyncSnapshot<FirebaseApp> dataSnapshot) {
           if (dataSnapshot.hasError) {
@@ -57,7 +60,6 @@ class _FirebasConfigState extends State<FirebasConfig> {
             );
           }
           if (dataSnapshot.connectionState == ConnectionState.done) {
-
             return AuthMainPage();
           }
           return Scaffold(

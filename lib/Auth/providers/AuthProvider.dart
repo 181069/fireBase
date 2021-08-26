@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:fatima/Auth/helpers/auth_helper.dart';
 import 'package:fatima/Auth/helpers/fire_Storage_helper.dart';
 import 'package:fatima/Auth/helpers/fire_store_helper.dart';
+import 'package:fatima/Auth/models/UserModel.dart';
 import 'package:fatima/Auth/models/country_model.dart';
 import 'package:fatima/Auth/models/register_requist.dart';
 import 'package:flutter/material.dart';
@@ -25,11 +26,15 @@ class AuthProvider extends ChangeNotifier{
   TextEditingController cituController = TextEditingController();
   TabController tabController;
   String password;
-
+   UserModel user;
   AuthProvider() {
     getCountriesFromFirestore();
   }
-
+ getUserFromFireStore()async{
+    String userId = AuthHelper.authHelper.getUserId();
+    user = await FirestoreHelper.firestoreHelper.getUserFromFirestore(userId);
+    notifyListeners();
+ }
   resetControllers() {
     emailController.clear();
     passwordController .clear();

@@ -19,11 +19,12 @@ class FirestoreHelper {
     }
   }
 
-  getUserFromFirestore(String userId) async {
+  Future<UserModel> getUserFromFirestore(String userId) async {
     DocumentSnapshot documentSnapshot =
     await firebaseFirestore.collection('Users').doc(userId).get();
+    return UserModel.fromMap(documentSnapshot.data());
+  //  print(documentSnapshot.data());
 
-    print(documentSnapshot.data());
   }
 
   Future<List<UserModel>> getAllUsersFromFirestore() async {
@@ -46,7 +47,7 @@ class FirestoreHelper {
       }).toList();
       return countries;
     } on Exception catch (e) {
-      // TODO
+      print(e.toString());
     }
   }
 

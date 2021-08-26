@@ -5,6 +5,7 @@ class AuthHelper {
 
   static AuthHelper authHelper = AuthHelper._();
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+
   Future<bool> test() async{
     if (firebaseAuth.currentUser == null) {
     return false;
@@ -41,7 +42,9 @@ class AuthHelper {
       print("fatima error" + e.toString());
     }
   }
-
+  String getUserId(){
+    return firebaseAuth.currentUser.uid;
+  }
   verifyEmail() async {
     await firebaseAuth.currentUser.sendEmailVerification();
     print('verification email has been sent, please check your email');
