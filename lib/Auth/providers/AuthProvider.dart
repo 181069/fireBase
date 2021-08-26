@@ -23,6 +23,10 @@ class AuthProvider extends ChangeNotifier{
   resetControllers() {
     emailController.clear();
     passwordController .clear();
+    cituController.clear();
+    countryController.clear();
+    firstNameController.clear();
+    lastNameController.clear();
   }
   register() async {
     try {
@@ -48,12 +52,17 @@ class AuthProvider extends ChangeNotifier{
   }
 
   login()async{
-    UserCredential userCredinial = await AuthHelper.authHelper.signin(emailController.text, passwordController.text);
-    FirestoreHelper.firestoreHelper
-        .getUserFromFirestore(userCredinial.user.uid);
+    try {
+      UserCredential userCredinial = await AuthHelper.authHelper.signin(emailController.text.toString().trim(), passwordController.text);
+      FirestoreHelper.firestoreHelper
+          .getUserFromFirestore(userCredinial.user.uid);
 
-    print("hi fatima login donre");
-    resetControllers();
+      print("hi fatima login donre");
+      resetControllers();
+    } on Exception catch (e) {
+      print("hi fatima error is"+e.toString());
+
+    }
   }
    checkLogin()async{
      IsSingIn = await AuthHelper.authHelper.test();
