@@ -24,7 +24,7 @@ class _AuthMainPageState extends State<AuthMainPage> with SingleTickerProviderSt
     bool x;
     Provider.of<AuthProvider>(context, listen: false).checkLogin();
    x = Provider.of<AuthProvider>(context, listen: false).IsSingIn;
-    tabController= TabController(length: 3, vsync: this,initialIndex:1 );
+    tabController= TabController(length: 3, vsync: this,initialIndex:x?2:1 );
     Provider.of<AuthProvider>(context, listen: false).tabController=tabController;
 
   }
@@ -52,7 +52,7 @@ class _AuthMainPageState extends State<AuthMainPage> with SingleTickerProviderSt
         children: [
           SignUpScreen(),
           LoginScreen(),
-          WelcomePage(),
+          ProfilePage(),
         ],
       ),
     );
