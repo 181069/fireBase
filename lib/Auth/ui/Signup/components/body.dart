@@ -33,10 +33,26 @@ class Body extends StatelessWidget {
               // ),
               RoundedInputField(
                 hintText: "Your Email",
-                controller1: provider.emailcontroller,
+                controller1: provider.emailController,
+              ),
+              RoundedInputField(
+                hintText: "Your city",
+                controller1: provider.cituController,
+              ),
+              RoundedInputField(
+                hintText: "Your country",
+                controller1: provider.countryController,
+              ),
+              RoundedInputField(
+                hintText: "Your fname",
+                controller1: provider.firstNameController,
+              ),
+              RoundedInputField(
+                hintText: "Your lname",
+                controller1: provider.lastNameController,
               ),
               RoundedPasswordField(
-              controller: provider.passwordcontroller,
+              controller: provider.passwordController,
               ),
               RoundedButton(
                 text: "SIGNUP",

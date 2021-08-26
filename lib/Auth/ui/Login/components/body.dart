@@ -33,10 +33,10 @@ class Body extends StatelessWidget {
               // ),
               RoundedInputField(
                 hintText: "Your Email",
-                controller1: provider.emailcontroller,
+                controller1: provider.emailController,
               ),
               RoundedPasswordField(
-              controller: provider.passwordcontroller,
+              controller: provider.passwordController,
               ),
               RoundedButton(
                 text: "SIGNIN",
