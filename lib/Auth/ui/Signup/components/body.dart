@@ -1,3 +1,4 @@
+import 'package:fatima/Auth/models/country_model.dart';
 import 'package:fatima/Auth/providers/AuthProvider.dart';
 import 'package:fatima/Auth/ui/Login/LoginScreen.dart';
 import 'package:fatima/Auth/ui/Signup/components/background.dart';
@@ -31,19 +32,28 @@ class Body extends StatelessWidget {
               //   "assets/icons/signup.svg",
               //   height: size.height * 0.35,
               // ),
+              GestureDetector(
+                onTap: () {
+                  provider.selectFile();
+                },
+                child: Container(
+                  height: 200,
+                  width: 200,
+                  color: Colors.grey,
+                  child: provider.file == null
+                      ? Container()
+                      : Image.file(provider.file, fit: BoxFit.cover),
+                ),
+              ),
               RoundedInputField(
                 hintText: "Your Email",
                 controller1: provider.emailController,
               ),
-              RoundedInputField(
-                hintText: "Your city",
-                controller1: provider.cituController,
+              RoundedPasswordField(
+                controller: provider.passwordController,
               ),
               RoundedInputField(
-                hintText: "Your country",
-                controller1: provider.countryController,
-              ),
-              RoundedInputField(
+
                 hintText: "Your fname",
                 controller1: provider.firstNameController,
               ),
@@ -51,9 +61,56 @@ class Body extends StatelessWidget {
                 hintText: "Your lname",
                 controller1: provider.lastNameController,
               ),
-              RoundedPasswordField(
-              controller: provider.passwordController,
+
+              provider.countries == null
+                  ? Container()
+                  : Container(
+                padding:
+                EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(15)),
+                child: DropdownButton<CountryModel>(
+                  isExpanded: true,
+                  underline: Container(),
+                  value: provider.selectedCountry,
+                  onChanged: (x) {
+                    provider.selectCountry(x);
+                  },
+                  items: provider.countries.map((e) {
+                    return DropdownMenuItem<CountryModel>(
+                      child: Text(e.name),
+                      value: e,
+                    );
+                  }).toList(),
+                ),
               ),
+              provider.countries == null
+                  ? Container()
+                  : Container(
+                padding:
+                EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(15)),
+                child: DropdownButton<dynamic>(
+                  isExpanded: true,
+                  underline: Container(),
+                  value: provider.selectedCity,
+                  onChanged: (x) {
+                    provider.selectCity(x);
+                  },
+                  items: provider.cities.map((e) {
+                    return DropdownMenuItem<dynamic>(
+                      child: Text(e),
+                      value: e,
+                    );
+                  }).toList(),
+                ),
+              ),
+
               RoundedButton(
                 text: "SIGNUP",
                 press: () {

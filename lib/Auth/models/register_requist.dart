@@ -4,6 +4,7 @@ class RegisterRequest {
   String id;
   String email;
   String password;
+  String imageUrl;
   String city;
   String country;
   String fName;
@@ -16,6 +17,7 @@ class RegisterRequest {
     @required this.country,
     @required this.fName,
     @required this.lName,
+    @required this.imageUrl,
   });
   toMap() {
     return {
@@ -24,7 +26,8 @@ class RegisterRequest {
       'city': this.city,
       'country': this.country,
       'fName': this.fName,
-      'lName': this.lName
+      'lName': this.lName,
+      'imageUrl': this.imageUrl
     };
   }
 }

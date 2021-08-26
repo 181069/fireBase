@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fatima/Auth/models/UserModel.dart';
+import 'package:fatima/Auth/models/country_model.dart';
 import 'package:fatima/Auth/models/register_requist.dart';
 
 class FirestoreHelper {
@@ -34,4 +35,19 @@ class FirestoreHelper {
     print(users.length);
     return users;
   }
+  Future<List<CountryModel>> getAllCountries() async {
+    try {
+      QuerySnapshot<Map<String, dynamic>> querySnapshot =
+      await firebaseFirestore.collection('countries').get();
+      List<CountryModel> countries = querySnapshot.docs.map((e) {
+        Map map = e.data();
+        map['id'] = e.id;
+        return CountryModel.fromJson(map);
+      }).toList();
+      return countries;
+    } on Exception catch (e) {
+      // TODO
+    }
+  }
+
 }
