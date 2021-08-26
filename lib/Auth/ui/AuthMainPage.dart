@@ -1,4 +1,5 @@
 import 'package:fatima/Auth/providers/AuthProvider.dart';
+import 'package:fatima/Auth/ui/chats/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,9 +23,9 @@ class _AuthMainPageState extends State<AuthMainPage> with SingleTickerProviderSt
 
     bool x;
     Provider.of<AuthProvider>(context, listen: false).checkLogin();
-    x = Provider.of<AuthProvider>(context, listen: false).IsSingIn;
-    tabController= TabController(length: 3, vsync: this,initialIndex:x ?2:1 );
-   Provider.of<AuthProvider>(context, listen: false).tabController=tabController;
+   x = Provider.of<AuthProvider>(context, listen: false).IsSingIn;
+    tabController= TabController(length: 3, vsync: this,initialIndex:1 );
+    Provider.of<AuthProvider>(context, listen: false).tabController=tabController;
 
   }
   @override

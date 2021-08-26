@@ -30,7 +30,7 @@ class AuthProvider extends ChangeNotifier{
   AuthProvider() {
     getCountriesFromFirestore();
   }
- getUserFromFireStore()async{
+ getUserFromFireStore() async{
     String userId = AuthHelper.authHelper.getUserId();
     user = await FirestoreHelper.firestoreHelper.getUserFromFirestore(userId);
     notifyListeners();
@@ -78,9 +78,9 @@ class AuthProvider extends ChangeNotifier{
 
       print("hi fatima login donre");
       resetControllers();
-      tabController.animateTo(2);
+     tabController.animateTo(2);
     } on Exception catch (e) {
-      print("hi fatima error is"+e.toString());
+      print("hi fatima error from login function in authprovider is"+e.toString());
 
     }
   }
